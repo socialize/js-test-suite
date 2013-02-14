@@ -17,8 +17,8 @@ It ensures your JS is written to standards (follows coding rules) for things lik
 compatibility, or to make sure your JS minify does not encounter issues due to missing delimiters etc.
 
 
-Note: If you run it locally the test will work but you will get an error like this:
+Note: If you run it locally on chrome the test will work, but you will get an error like this:
 
 	XMLHttpRequest cannot load file://localhost/Users/seanshadmand/git/socialize_js_test_suite/your-js-files/example_class.js. Origin null is not allowed by Access-Control-Allow-Origin.
 	
-Resulting from JQuery based AJAX calls not being allowed
+
