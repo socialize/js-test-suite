@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Socialize JS Tests</title>
+	<title>Socialize Profiles UI Tests</title>
   
 	<!--YUI-->
 	<script src="yui/yahoo-dom-event.js"></script>
@@ -19,8 +19,17 @@
 	<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
 	
-	<!-- Socialize -->	
-	<script type="text/javascript" src="../example_class.js"></script>
+	<!-- required helper files -->
+	<script type="text/javascript" src="../js-extensions/string_ext.js"></script>
+	<script type="text/javascript" src="../js-extensions/jquery_ext_1_8_3.js"></script>
+
+	
+	
+	
+	<!-- !!Place JS files to test here (and further down as well)!! -->
+	<script type="text/javascript" src="../your-js-files/example_class.js"></script>
+	
+	
 	
 	<!-- Tests -->
 	<link rel="stylesheet" type="text/css" href="tests.css">	
@@ -78,15 +87,8 @@
 					$('#dvLoading').hide();
 					$('#dvTests').show();
 					
-		        	runJSLint('../js/query.js');
-		        	runJSLint('../js/log.js');
-		        	runJSLint('../js/collection.js');
-		        	runJSLint('../js/gmap.js');
-		        	runJSLint('../js/application.js');
-		        	runJSLint('../js/es_backend.js');
-		        	runJSLint('../js/config.js');
-		        	runJSLint('../js/main.js');	
-		        	runJSLint('../js/ui.js');	
+		        		
+		        	runJSLint('../your-js-files/example_class.js');	
 					
 		            break;		
 		            

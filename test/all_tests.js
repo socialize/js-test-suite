@@ -3,8 +3,8 @@ var TestRunner = YAHOO.tool.TestRunner;
 var requested = 0;
 var loaded = 0;
 
-/* tests to run go here */
-importScript('unit/test_world.js');
+/* list unit test files here */
+importScript('unit/template.js');
 
 function onScriptLoad() {
 	loaded++;
