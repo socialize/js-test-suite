@@ -1,0 +1,53 @@
+DIV.pass {
+	border: solid 1px #006600;
+	background: #99ff66;
+	color: #006600;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12pt;
+	padding:5px;
+	margin:5px;
+	width:600px;
+}
+
+DIV.fail {
+	border: solid 1px #660000;
+	background: #da0000;
+	color: #ffeb8f;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12pt;
+	padding:5px;
+	margin:5px;
+	width:600px;
+}
+
+body {
+	padding:10px;
+}
+
+pre {
+	font-size: 8pt;
+}
+
+DIV.report_pass {
+	display: inline-block;
+	border: solid 1px #006600;
+	background: #99ff66;
+	color: #006600;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 20pt;
+	padding:5px;
+	margin:5px;
+	width:170px;
+}
+
+DIV.report_fail {
+	display: inline-block;
+	border: solid 1px #660000;
+	background: #da0000;
+	color: #ffeb8f;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 20pt;
+	padding:5px;
+	margin:5px;
+	width:170px;
+}

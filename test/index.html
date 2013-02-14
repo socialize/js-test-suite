@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Socialize JS Tests</title>
+  
+	<!--YUI-->
+	<script src="yui/yahoo-dom-event.js"></script>
+	<script src="yui/logger-min.js"></script>
+	<script src="yui/yuitest-min.js"></script>  
+	
+	<!--JSLInt-->
+	<script src="crockford/jslint.js"></script>	
+	
+	<!-- JQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+		
+	<!-- Bootstrap -->
+	<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+	
+	<!-- Socialize -->	
+	<script type="text/javascript" src="../example_class.js"></script>
+	
+	<!-- Tests -->
+	<link rel="stylesheet" type="text/css" href="tests.css">	
+	
+	<script type="text/javascript" src="all_tests.js"></script>
+	
+	<script type="text/javascript">
+	
+		var dvPass = "<div class='pass'><strong>PASS:</strong>&nbsp;{0}&nbsp;:&nbsp;{1}</div>";
+		var dvFail = "<div class='fail'><strong>FAIL:</strong>&nbsp;{0}&nbsp;:&nbsp;{1}<br/><small>{2}</small></div>";
+		
+		var failCount = 0;
+		var passCount = 0;
+		
+		function runJSLint(file) {
+			$.ajax({
+			  url: file,
+			  	success: function(data) {
+			  		var myResult = JSLINT(data, {
+			  			white: true,
+			  			nomen: true,
+			  			forin: true,
+			  		});
+			  		
+			  		if(!myResult) {
+			  			
+			  			var errors = JSLINT.errors;
+			  			
+			  			for ( var i = 0; i < errors.length; i++) {
+			  				if(errors[i]) {
+				  				failCount++;
+				  				$('#spFailCount').html(failCount);
+			  					$('#dvResults').append("<div class='fail'><strong>FAIL:</strong><br/>" + file + ":" + errors[i].reason + " at line " + errors[i].line + "<br/>" + errors[i].evidence + "</div>");
+			  				}
+						}
+			  		}
+			  		else {
+			  			passCount++;
+			  			$('#spPassCount').html(passCount);
+			  			
+			  			$('#dvResults').append("<div class='pass'><strong>PASS:</strong> " + file + " JSLint OK</div>");
+			  		}
+				},
+			  	dataType: 'text'
+			});
+			
+
+		}		
+	
+		function handleTestResult(data){
+		    var TestRunner = YAHOO.tool.TestRunner;
+		    switch(data.type) {
+		        case TestRunner.BEGIN_EVENT:
+		        	$('#dvResults').empty();
+					$('#dvLoading').hide();
+					$('#dvTests').show();
+					
+		        	runJSLint('../js/query.js');
+		        	runJSLint('../js/log.js');
+		        	runJSLint('../js/collection.js');
+		        	runJSLint('../js/gmap.js');
+		        	runJSLint('../js/application.js');
+		        	runJSLint('../js/es_backend.js');
+		        	runJSLint('../js/config.js');
+		        	runJSLint('../js/main.js');	
+		        	runJSLint('../js/ui.js');	
+					
+		            break;		
+		            
+		        case TestRunner.COMPLETE_EVENT:
+       	
+		            break;	
+		            
+		        case TestRunner.TEST_FAIL_EVENT:
+		        	failCount++;
+		        	console.log(data.error);
+		        	$('#spFailCount').html(failCount);
+		        	$('#dvResults').append(dvFail.format(data.testCase.name, data.testName, data.error.message));
+		            break;
+		        case TestRunner.TEST_PASS_EVENT:
+		        	passCount++;
+		        	$('#spPassCount').html(passCount);
+		        	$('#dvResults').append(dvPass.format(data.testCase.name,data.testName));
+		            break;
+		    }
+		}
+		
+		$(document).ready(function () {
+			$('#dvLoading').show();
+			$('#dvTests').hide();
+			runTests(handleTestResult);
+		});
+	
+	</script>
+</head>
+<body>
+<div id="dvLoading">
+	Loading...
+</div>
+<div id="dvTests">
+	<div id="dvReport" style="float:left; margin-right: 10px">
+		<div id="dvResults"></div>
+	</div>
+	<div id="dvReport">
+		<div class="report_pass">PASSED: <span id="spPassCount">0</span></div>
+		<br/>
+		<div class="report_fail">FAILED: <span id="spFailCount">0</span></div>
+	</div>
+</div>
+
+<!-- General purpose DIV for tests to use when needed -->
+<div id="dvHolder" style="position: absolute;"></div>
+
+</body>
+</html>
